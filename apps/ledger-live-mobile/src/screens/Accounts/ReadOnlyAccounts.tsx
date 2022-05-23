@@ -8,7 +8,7 @@ import {
   listTokens,
   useCurrenciesByMarketcap,
 } from "@ledgerhq/live-common/lib/currencies";
-import { Flex } from "@ledgerhq/native-ui";
+import { Flex, Box } from "@ledgerhq/native-ui";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRefreshAccountsOrdering } from "../../actions/general";
@@ -17,6 +17,7 @@ import TrackScreen from "../../analytics/TrackScreen";
 
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
 import ReadOnlyAccountRow from "./ReadOnlyAccountRow";
+import { TAB_BAR_SAFE_HEIGHT } from "../../components/TabBar/TabBarSafeAreaView";
 
 type Props = {
   navigation: any;
@@ -50,12 +51,14 @@ function Accounts({ navigation, route }: Props) {
     [sortedCryptoCurrencies],
   );
 
-  const renderItem = useCallback(
-    ({ item }: { item: any }) => (
-      <ReadOnlyAccountRow navigation={navigation} currency={item.currency} />
-    ),
-    [navigation],
-  );
+  const data = [
+    ...assets.map(({ currency }) => (
+      <Box key={currency.id} mx={6}>
+        <ReadOnlyAccountRow navigation={navigation} currency={currency} />
+      </Box>
+    )),
+    <Box mx={6}>{/* Gradient box here */}</Box>,
+  ];
 
   return (
     <SafeAreaView
@@ -65,10 +68,12 @@ function Accounts({ navigation, route }: Props) {
       <TrackScreen category="Accounts" accountsLength={accounts.length} />
       <Flex flex={1} bg={"background.main"}>
         <FlatList
-          data={assets}
-          renderItem={renderItem}
+          data={data}
+          renderItem={({ item }: any) => item}
           keyExtractor={item => item.id}
-          contentContainerStyle={{ flex: 1 }}
+          contentContainerStyle={{
+            paddingBottom: TAB_BAR_SAFE_HEIGHT,
+          }}
         />
       </Flex>
     </SafeAreaView>

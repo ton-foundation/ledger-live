@@ -1,18 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { TouchableOpacity } from "react-native";
-import {
-  getAccountCurrency,
-  getAccountName,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import {
-  Account,
-  Currency,
-  TokenAccount,
-  CryptoCurrency,
-} from "@ledgerhq/live-common/lib/types";
-import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
+import { Currency } from "@ledgerhq/live-common/lib/types";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -29,9 +18,6 @@ type Props = {
 const AccountRow = ({ navigation, currency }: Props) => {
   const { colors } = useTheme();
 
-  //   const currency = getAccountCurrency(account);
-  //   const name = getAccountName(account);
-  //   const unit = getAccountUnit(account);
   const name = "BTC";
   const unit = {
     name: "BTC",
@@ -39,18 +25,13 @@ const AccountRow = ({ navigation, currency }: Props) => {
     magnitude: 2,
   };
 
-  const tag =
-    account.derivationMode !== undefined &&
-    account.derivationMode !== null &&
-    getTagDerivationMode(currency as CryptoCurrency, account.derivationMode);
-
   const color = useMemo(
     () => ensureContrast(getCurrencyColor(currency), colors.constant.white),
     [colors, currency],
   );
 
   const onAccountPress = useCallback(() => {
-    navigation.navigate(ScreenName.Account, { accountId: "BTC" });
+    navigation.navigate(ScreenName.Account, { accountId: "bitcoin" });
   }, [navigation]);
 
   return (

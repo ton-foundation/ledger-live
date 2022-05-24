@@ -31,7 +31,7 @@ const AccountRow = ({ navigation, currency }: Props) => {
   );
 
   const onAccountPress = useCallback(() => {
-    navigation.navigate(ScreenName.Account, { accountId: "bitcoin" });
+    navigation.navigate(ScreenName.Account, { currencyId: "bitcoin" });
   }, [navigation]);
 
   return (

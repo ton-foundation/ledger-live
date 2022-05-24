@@ -1766,6 +1766,12 @@
     "nft": {
       "receiveNft": "Receive NFT",
       "howTo": "To add NFTs, you need to <0>receive them</0> using your <1>{{currency}} address</1>."
+    },
+    "readOnly": {
+      "noTransaction": {
+        "title": "You don't have any transactions",
+        "desc": "You'll need a device in order to buy or receive {{assetName}}"
+      }
     }
   },
   "accounts": {
@@ -1794,7 +1800,13 @@
       }
     },
     "noResultsFound": "No asset found",
-    "noResultsDesc": "Please verify the spelling and try again"
+    "noResultsDesc": "Please verify the spelling and try again",
+    "readOnly": {
+      "moreAssetsSupport": {
+        "title": "+ more than 6000 others",
+        "desc": "Ledger supports more than 6000 coins and tokens"
+      }
+    }
   },
   "distribution": {
     "header": "Asset allocation",
